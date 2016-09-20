@@ -28,10 +28,12 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency "faraday"
+  spec.add_runtime_dependency "net-http-persistent"
 
   spec.add_development_dependency "bundler", "~> 1.12"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "guard-rspec", "~> 4.7"
   spec.add_development_dependency "pry"
   spec.add_development_dependency "awesome_print"
   spec.add_development_dependency "vcr"

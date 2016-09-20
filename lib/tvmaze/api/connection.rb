@@ -8,7 +8,6 @@ module Tvmaze
       include Singleton
 
       def initialize
-        puts "Initialized singleton"
         @conn = Faraday.new(url: 'http://api.tvmaze.com') do |faraday|
           faraday.request  :url_encoded
           faraday.response :logger
