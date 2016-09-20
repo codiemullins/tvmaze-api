@@ -5,7 +5,7 @@ describe Tvmaze::Api do
     expect(Tvmaze::Api::VERSION).not_to be nil
   end
 
-  it 'does something useful' do
-    expect(false).to eq(true)
+  it 'has a connection' do
+    expect(Tvmaze::Api::CONNECTION).not_to be nil
   end
 end

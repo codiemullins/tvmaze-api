@@ -1,4 +1,5 @@
 require "tvmaze/api/connection"
+require "tvmaze/api/show"
 require "tvmaze/api/version"
 
 module Tvmaze
