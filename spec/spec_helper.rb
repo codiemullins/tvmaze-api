@@ -5,6 +5,7 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
 require 'tvmaze/api'
 require 'faraday'
+require 'faraday_middleware'
 require 'vcr'
 
 VCR.configure do |config|
@@ -14,5 +15,6 @@ end
 
 Tvmaze::Api::CONNECTION = Faraday.new(url: 'http://api.tvmaze.com') do |faraday|
   faraday.use VCR::Middleware::Faraday
+  faraday.use FaradayMiddleware::FollowRedirects
   faraday.adapter  :net_http_persistent
 end

@@ -1,4 +1,5 @@
 require 'faraday'
+require 'faraday_middleware'
 require 'singleton'
 
 module Tvmaze
@@ -9,8 +10,7 @@ module Tvmaze
 
       def initialize
         @conn = Faraday.new(url: 'http://api.tvmaze.com') do |faraday|
-          faraday.request  :url_encoded
-          faraday.response :logger
+          faraday.use FaradayMiddleware::FollowRedirects
           faraday.adapter  :net_http_persistent
         end
       end

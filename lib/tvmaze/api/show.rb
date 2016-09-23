@@ -1,4 +1,6 @@
 require "json"
+require "active_support"
+require "active_support/core_ext/object/to_query"
 
 module Tvmaze
   module Api
@@ -29,6 +31,23 @@ module Tvmaze
 
       def self.find id
         response = Tvmaze::Api::CONNECTION.get("/shows/#{id}")
+        attributes = JSON.parse(response.body)
+        new attributes
+      end
+
+      def self.search query, single_search = false
+        endpoint = single_search ? "/singlesearch/shows" : "/search/shows"
+        response = Tvmaze::Api::CONNECTION.get "#{endpoint}?q=#{query}"
+        results = JSON.parse(response.body)
+        if results.is_a?(Array)
+          results.map { |attributes| new attributes["show"] }
+        else
+          new results
+        end
+      end
+
+      def self.lookup lookup
+        response = Tvmaze::Api::CONNECTION.get "/lookup/shows?#{lookup.to_query}"
         attributes = JSON.parse(response.body)
         new attributes
       end
